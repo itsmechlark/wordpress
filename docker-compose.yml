@@ -1,0 +1,26 @@
+---
+version: '2'
+services:
+  wordpress:
+    restart: always
+    image: wordpress
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_PASSWORD: cEavYKT4dwcHgqYs
+    volumes_from:
+      - data
+    links:
+      - mysql
+  mysql:
+    restart: always
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: cEavYKT4dwcHgqYs
+    volumes_from:
+      - data 
+  data:
+    image: busybox
+    volumes:
+      - ./html:/var/www/html
+      - ./database:/var/lib/mysql
